@@ -60,19 +60,17 @@ struct Home: View {
                     .padding(.horizontal, 28)
                     .frame(width: screenWidth, height: screenHeight * 0.08)
                     .background(Color("gray"))
-                    
                 }
                 if !mapData.places.isEmpty && mapData.searchedText != "" {
                     ScrollView {
-                        VStack(alignment: .leading, spacing:-0) {
+                        VStack(alignment: .leading, spacing: -0) {
                             ForEach(mapData.places) { place in
                                 VStack(alignment: .leading, spacing: -0) {
                                     Text(place.place.name ?? "")
-                                        .bold()
-                                        .font(.system(size: 20))
+                                        .font(.system(size: 18))
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.leading, 16)
-                                        .padding(.vertical, 12)
+                                        .padding(.vertical, 16)
                                         .foregroundColor(.white)
                                         .onTapGesture {
                                             mapData.selectPlace(place: place)
@@ -82,16 +80,16 @@ struct Home: View {
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .multilineTextAlignment(.leading)
+                                .transition(.opacity)
+                                .animation(.easeInOut(duration: 0.3))
                             }
                         }
                         .frame(maxWidth: .infinity)
                         .background(Color("gray"))
                     }
                     .padding(.top, -10)
-                    .frame(alignment: .leading) // Set alignment to .leading
+                    .frame(alignment: .leading)
                 }
-                
-                
             }
             
         }.onAppear(perform: {
