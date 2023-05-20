@@ -7,15 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31592B9A2A171ACD00290E1A /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592B992A171ACD00290E1A /* CoreDataViewModel.swift */; };
+		31592B9C2A171ADE00290E1A /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592B9B2A171ADE00290E1A /* ReviewView.swift */; };
 		3197AB7D2A16151200C8ED1E /* MemoSpotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB7C2A16151200C8ED1E /* MemoSpotApp.swift */; };
 		3197AB7F2A16151200C8ED1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB7E2A16151200C8ED1E /* ContentView.swift */; };
 		3197AB812A16151300C8ED1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3197AB802A16151300C8ED1E /* Assets.xcassets */; };
 		3197AB842A16151300C8ED1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3197AB832A16151300C8ED1E /* Preview Assets.xcassets */; };
 		3197AB862A16151300C8ED1E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB852A16151300C8ED1E /* Persistence.swift */; };
 		3197AB892A16151300C8ED1E /* MemoSpot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB872A16151300C8ED1E /* MemoSpot.xcdatamodeld */; };
+		3197AB932A16187600C8ED1E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB922A16187600C8ED1E /* Home.swift */; };
+		3197AB952A16187C00C8ED1E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB942A16187C00C8ED1E /* MapView.swift */; };
+		3197AB972A16188800C8ED1E /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB962A16188800C8ED1E /* MapViewModel.swift */; };
+		31B485E32A16587000B4CDC1 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B485E22A16586F00B4CDC1 /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31592B992A171ACD00290E1A /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
+		31592B9B2A171ADE00290E1A /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		3197AB792A16151200C8ED1E /* MemoSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3197AB7C2A16151200C8ED1E /* MemoSpotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSpotApp.swift; sourceTree = "<group>"; };
 		3197AB7E2A16151200C8ED1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +31,10 @@
 		3197AB832A16151300C8ED1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3197AB852A16151300C8ED1E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		3197AB882A16151300C8ED1E /* MemoSpot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MemoSpot.xcdatamodel; sourceTree = "<group>"; };
+		3197AB922A16187600C8ED1E /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		3197AB942A16187C00C8ED1E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		3197AB962A16188800C8ED1E /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		31B485E22A16586F00B4CDC1 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31592B982A171AC000290E1A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				31592B992A171ACD00290E1A /* CoreDataViewModel.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		3197AB702A16151200C8ED1E = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +75,10 @@
 		3197AB7B2A16151200C8ED1E /* MemoSpot */ = {
 			isa = PBXGroup;
 			children = (
+				31592B982A171AC000290E1A /* CoreData */,
+				3197AB912A16157100C8ED1E /* ViewModel */,
+				3197AB902A16156800C8ED1E /* View */,
+				3197AB8F2A16155700C8ED1E /* Model */,
 				3197AB7C2A16151200C8ED1E /* MemoSpotApp.swift */,
 				3197AB7E2A16151200C8ED1E /* ContentView.swift */,
 				3197AB802A16151300C8ED1E /* Assets.xcassets */,
@@ -71,6 +95,32 @@
 				3197AB832A16151300C8ED1E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3197AB8F2A16155700C8ED1E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				31B485E22A16586F00B4CDC1 /* Place.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3197AB902A16156800C8ED1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3197AB922A16187600C8ED1E /* Home.swift */,
+				3197AB942A16187C00C8ED1E /* MapView.swift */,
+				31592B9B2A171ADE00290E1A /* ReviewView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3197AB912A16157100C8ED1E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3197AB962A16188800C8ED1E /* MapViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,8 +193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31592B9C2A171ADE00290E1A /* ReviewView.swift in Sources */,
 				3197AB862A16151300C8ED1E /* Persistence.swift in Sources */,
+				31592B9A2A171ACD00290E1A /* CoreDataViewModel.swift in Sources */,
+				3197AB952A16187C00C8ED1E /* MapView.swift in Sources */,
 				3197AB892A16151300C8ED1E /* MemoSpot.xcdatamodeld in Sources */,
+				31B485E32A16587000B4CDC1 /* Place.swift in Sources */,
+				3197AB932A16187600C8ED1E /* Home.swift in Sources */,
+				3197AB972A16188800C8ED1E /* MapViewModel.swift in Sources */,
 				3197AB7F2A16151200C8ED1E /* ContentView.swift in Sources */,
 				3197AB7D2A16151200C8ED1E /* MemoSpotApp.swift in Sources */,
 			);
@@ -278,6 +334,7 @@
 				DEVELOPMENT_TEAM = HHQRX4Z95P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "MemoSpot needs location access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -307,6 +364,7 @@
 				DEVELOPMENT_TEAM = HHQRX4Z95P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "MemoSpot needs location access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
