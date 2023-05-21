@@ -13,6 +13,19 @@ struct MapView: UIViewRepresentable {
     @EnvironmentObject var mapData: MapViewModel
     
     class Coordinator: NSObject, MKMapViewDelegate {
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            
+            // customized pin
+            if annotation.isKind(of: MKUserLocation.self) {
+                return nil
+            } else {
+                let pinAnnotation = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "PIN_VIEW")
+                pinAnnotation.tintColor = .green
+                pinAnnotation.animatesWhenAdded = true
+                pinAnnotation.canShowCallout = true                
+                return pinAnnotation
+            }
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -21,6 +34,7 @@ struct MapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         let view = mapData.mapView
+        
         view.showsUserLocation = true
         view.delegate = context.coordinator
         
