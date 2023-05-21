@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		31592B9A2A171ACD00290E1A /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592B992A171ACD00290E1A /* CoreDataViewModel.swift */; };
 		31592B9C2A171ADE00290E1A /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592B9B2A171ADE00290E1A /* ReviewView.swift */; };
+		31592B9E2A19F03E00290E1A /* SelectedLocationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592B9D2A19F03E00290E1A /* SelectedLocationSheet.swift */; };
+		31592BA42A19F07A00290E1A /* NoteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592BA32A19F07A00290E1A /* NoteSheet.swift */; };
+		31592BA62A1A280200290E1A /* AddReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592BA52A1A280200290E1A /* AddReviewButton.swift */; };
+		31592BA82A1A281200290E1A /* SaveReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592BA72A1A281200290E1A /* SaveReviewButton.swift */; };
 		3197AB7D2A16151200C8ED1E /* MemoSpotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB7C2A16151200C8ED1E /* MemoSpotApp.swift */; };
 		3197AB7F2A16151200C8ED1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197AB7E2A16151200C8ED1E /* ContentView.swift */; };
 		3197AB812A16151300C8ED1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3197AB802A16151300C8ED1E /* Assets.xcassets */; };
@@ -24,6 +28,10 @@
 /* Begin PBXFileReference section */
 		31592B992A171ACD00290E1A /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 		31592B9B2A171ADE00290E1A /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		31592B9D2A19F03E00290E1A /* SelectedLocationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationSheet.swift; sourceTree = "<group>"; };
+		31592BA32A19F07A00290E1A /* NoteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSheet.swift; sourceTree = "<group>"; };
+		31592BA52A1A280200290E1A /* AddReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewButton.swift; sourceTree = "<group>"; };
+		31592BA72A1A281200290E1A /* SaveReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveReviewButton.swift; sourceTree = "<group>"; };
 		3197AB792A16151200C8ED1E /* MemoSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3197AB7C2A16151200C8ED1E /* MemoSpotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSpotApp.swift; sourceTree = "<group>"; };
 		3197AB7E2A16151200C8ED1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +64,17 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		31592B9F2A19F04300290E1A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				31592B9D2A19F03E00290E1A /* SelectedLocationSheet.swift */,
+				31592BA32A19F07A00290E1A /* NoteSheet.swift */,
+				31592BA52A1A280200290E1A /* AddReviewButton.swift */,
+				31592BA72A1A281200290E1A /* SaveReviewButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		3197AB702A16151200C8ED1E = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +94,7 @@
 		3197AB7B2A16151200C8ED1E /* MemoSpot */ = {
 			isa = PBXGroup;
 			children = (
+				31592B9F2A19F04300290E1A /* Components */,
 				31592B982A171AC000290E1A /* CoreData */,
 				3197AB912A16157100C8ED1E /* ViewModel */,
 				3197AB902A16156800C8ED1E /* View */,
@@ -194,11 +214,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				31592B9C2A171ADE00290E1A /* ReviewView.swift in Sources */,
+				31592BA42A19F07A00290E1A /* NoteSheet.swift in Sources */,
 				3197AB862A16151300C8ED1E /* Persistence.swift in Sources */,
 				31592B9A2A171ACD00290E1A /* CoreDataViewModel.swift in Sources */,
+				31592BA62A1A280200290E1A /* AddReviewButton.swift in Sources */,
 				3197AB952A16187C00C8ED1E /* MapView.swift in Sources */,
 				3197AB892A16151300C8ED1E /* MemoSpot.xcdatamodeld in Sources */,
 				31B485E32A16587000B4CDC1 /* Place.swift in Sources */,
+				31592BA82A1A281200290E1A /* SaveReviewButton.swift in Sources */,
+				31592B9E2A19F03E00290E1A /* SelectedLocationSheet.swift in Sources */,
 				3197AB932A16187600C8ED1E /* Home.swift in Sources */,
 				3197AB972A16188800C8ED1E /* MapViewModel.swift in Sources */,
 				3197AB7F2A16151200C8ED1E /* ContentView.swift in Sources */,

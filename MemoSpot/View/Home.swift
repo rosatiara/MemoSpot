@@ -16,13 +16,14 @@ struct Home: View {
     @State var screenWidth = UIScreen.main.bounds.width
     @State var screenHeight = UIScreen.main.bounds.height
     
+//    @State private var isSheetPresented = false
+
+    
     var body: some View {
         ZStack { // Zstack map & properties (search bar, change map type)
             MapView()
                 .environmentObject(mapData)
                 .ignoresSafeArea(.all, edges: .all)
-                .onAppear {
-                }
             VStack {
                 // recenter & maptype buttons
                 VStack {
@@ -48,47 +49,48 @@ struct Home: View {
                     })
                 }.frame(maxWidth: .infinity, alignment: .trailing).padding().offset(y: -20)
                 Spacer()
-                VStack(spacing: -20) {
+                VStack(spacing: 10) {
                     // search bar
-                    HStack(spacing: -10) {
+                    HStack(spacing: 20) {
                         Image(systemName: "magnifyingglass")
                             .resizable()
                             .frame(width: 20, height: 20)
+                            .padding(.leading)
                             .foregroundColor(Color("accentColor"))
-                        TextField("Search...", text: $mapData.searchedText).colorScheme(.dark).background(Color("gray")).padding(.horizontal, 28).accentColor(Color("accentColor"))
-                    }
-                    .padding(.horizontal, 28)
-                    .frame(width: screenWidth, height: screenHeight * 0.08)
-                    .background(Color("gray"))
-                }
-                if !mapData.places.isEmpty && mapData.searchedText != "" {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: -0) {
-                            ForEach(mapData.places) { place in
-                                VStack(alignment: .leading, spacing: -0) {
-                                    Text(place.place.name ?? "")
-                                        .font(.system(size: 18))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+                        TextField("Search...", text: $mapData.searchedText).colorScheme(.dark).background(Color("gray")).accentColor(Color("accentColor"))
+                    }.frame(width: 358, height: 50).background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("gray")))
+                    if !mapData.places.isEmpty && mapData.searchedText != "" {
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 0) {
+                                ForEach(mapData.places) { place in
+                                    VStack(alignment: .leading, spacing: -0) {
+                                        VStack(alignment: .leading, spacing: 5) {
+                                            Text(place.place.name ?? "")
+                                                .fontWeight(.semibold)
+                                                .font(.system(size: 18))
+                                            Text("\(place.place.locality ?? ""), \(place.place.country ?? "")")
+                                                .opacity(0.7)
+                                                .font(.system(size: 16))
+                                        }
                                         .padding(.leading, 16)
                                         .padding(.vertical, 16)
                                         .foregroundColor(.white)
                                         .onTapGesture {
                                             mapData.selectPlace(place: place)
                                         }
-                                    Divider()
-                                        .overlay(.white)
+                                        Divider()
+                                            .overlay(.white)
+                                    }
+                                    .frame(alignment: .leading)
+                                    .transition(.opacity)
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .multilineTextAlignment(.leading)
-                                .transition(.opacity)
-                                .animation(.easeInOut(duration: 0.3))
                             }
+                            .frame(width: 358)
+                            .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("gray")))
                         }
-                        .frame(maxWidth: .infinity)
-                        .background(Color("gray"))
+                        .frame(alignment: .leading)
                     }
-                    .padding(.top, -10)
-                    .frame(alignment: .leading)
+
                 }
             }
             
@@ -101,7 +103,6 @@ struct Home: View {
                   message: Text("Please enable permission in App Settings"),
                   dismissButton: .default(Text("Go to Settings"),
                                           action: {
-                // open settings app
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         })
