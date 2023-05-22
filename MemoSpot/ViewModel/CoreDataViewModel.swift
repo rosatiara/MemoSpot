@@ -17,7 +17,7 @@ class CoreDataViewModel: ObservableObject {
     @Published var latitude: Double = 0.0
     @Published var longitude: Double = 0.0
     @Published var placeName: String = ""
-    @Published var review: String = ""
+    @Published var placeNote: String = ""
     
     let manager = PersistenceController.shared
     
@@ -34,24 +34,46 @@ class CoreDataViewModel: ObservableObject {
             }
         }
     }
+    
+    func saveNote() {
+        let newNote = PlaceEntity(context: manager.container.viewContext)
+        newNote.latitude = latitude
+        newNote.longitude = longitude
+        newNote.placeName = placeName
+        newNote.placeNote = placeNote
         
-    func getPlaceReview() -> String {
-        guard(!placeList.isEmpty) else { return " " }
+        save()
+        fetchPlaces()
         
-        return placeList.first!.review ?? "No review"
+        // Reset the input fields after saving
+        latitude = 0.0
+        longitude = 0.0
+        placeName = ""
+        placeNote = ""
     }
     
-    func getPlaceName() -> String {
+    func isDataEmpty() -> Bool {
+        return placeList.isEmpty
+    }
+    
+    func getName() -> String {
         guard(!placeList.isEmpty) else { return " " }
         
         return placeList.first!.placeName ?? "No review"
     }
     
-    func addCoordinate(longitude: Double, latitude: Double) -> CLLocationCoordinate2D {
+    func getCoordinate(longitude: Double, latitude: Double) -> CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    func saveReview() {
+    func addNote(note: String) {
+        let newNote = PlaceEntity(context: manager.container.viewContext)
+        newNote.placeNote = note
+        save()
+        fetchPlaces()
+    }
+    
+    func save() {
         withAnimation(Animation.default) {
             do {
                 try manager.container.viewContext.save()

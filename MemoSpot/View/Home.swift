@@ -16,7 +16,7 @@ struct Home: View {
     @State var locationManager = CLLocationManager()
     @State var screenWidth = UIScreen.main.bounds.width
     @State var screenHeight = UIScreen.main.bounds.height
-        @State private var showLocationSheet = false
+    @State private var showLocationSheet = false
     
     
     var body: some View {
@@ -119,6 +119,7 @@ struct Home: View {
                 }
             }
         })
+        .environmentObject(mapData)
     }
 }
 

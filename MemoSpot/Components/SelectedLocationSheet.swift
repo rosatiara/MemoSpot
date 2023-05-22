@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SelectedLocationSheet: View {
-    @StateObject var mapData = MapViewModel()
+    @EnvironmentObject var mapData: MapViewModel
     @State private var showNoteSheet = false
     
     var body: some View {
@@ -16,13 +16,10 @@ struct SelectedLocationSheet: View {
             Color("gray").edgesIgnoringSafeArea(.all)
             VStack(spacing: 60) {
                 VStack(alignment: .leading, spacing: 10) {
-                    if let currentPlace = mapData.places.first {
-                        Text(currentPlace.place.name ?? "" ).fontWeight(.bold).font(.system(size: 18))
-                    } else {
-                        Text("No places available")
-                    }
-
-                    Text("Jalan Green Office Park nomor 94, kecamatan Bojongkenyot, Jakarta Tenggara").font(.system(size: 16))
+                    Text(mapData.selectedPlace?.place.name ?? "No Place Selected")
+                        .bold()
+                        .font(.system(size: 18))
+                    Text(mapData.selectedPlace?.address ?? "").font(.system(size: 16))
                 }
                 .padding(.horizontal, 35)
                 .foregroundColor(Color("accentColor"))
@@ -39,15 +36,15 @@ struct SelectedLocationSheet: View {
                     NoteSheet().presentationDetents([.fraction(0.4)]) // to make sheet smaller
                 }
             }
-
-
+            
+            
         }
     }
 }
 
 
-struct SelectedLocationSheet_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectedLocationSheet()
-    }
-}
+//struct SelectedLocationSheet_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SelectedLocationSheet()
+//    }
+//}

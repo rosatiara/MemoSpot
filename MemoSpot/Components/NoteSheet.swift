@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NoteSheet: View {
     @State private var reviewText = ""
+    @StateObject private var viewModel = CoreDataViewModel()
     var body: some View {
         ZStack {
             Color("gray").edgesIgnoringSafeArea(.all)
@@ -22,6 +23,7 @@ struct NoteSheet: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Button("Save Review") {
+                    viewModel.saveNote()
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("accentColor"))

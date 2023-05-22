@@ -20,6 +20,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var searchedText = ""
     @Published var places: [Place] = []
+    @Published var selectedPlace: Place?
+    @Published var selectedPlaceAddress: Place?
     
     // location permission
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -86,24 +88,78 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    // go to the selected place
     func selectPlace(place: Place) {
         searchedText = ""
-        guard let coordinate = place.place.location?.coordinate else {return}
+        guard let coordinate = place.place.location?.coordinate else { return }
         
         let pointAnnotation = MKPointAnnotation()
         pointAnnotation.coordinate = coordinate
         pointAnnotation.title = place.place.name ?? "No name"
         
-        // delete previous place's pin/annotation
+        // delete previous place's pins/annotations
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(pointAnnotation)
         
-        // see how close you are to the desired location
+        // map scale view
         let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
         
+        // get address from selected place
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            guard error == nil else {
+                print("Reverse geocoding error:", error!.localizedDescription)
+                return
+            }
+            guard let placemark = placemarks?.first else {
+                print("No placemark found for the location")
+                return
+            }
+            
+            let address = self.formatAddress(placemark: placemark) // address formatting
+            DispatchQueue.main.async {
+                self.selectedPlace = place
+                self.selectedPlace?.address = address
+            }
+        }
+    }
+    /*
+     format address with comma separator
+     */
+    private func formatAddress(placemark: CLPlacemark) -> String {
+        var addressComponents: [String] = []
+        
+        if let name = placemark.name {
+            addressComponents.append(name)
+        }
+        if let thoroughfare = placemark.thoroughfare {
+            addressComponents.append(thoroughfare)
+        }
+        if let subThoroughfare = placemark.subThoroughfare {
+            addressComponents.append(subThoroughfare)
+        }
+        if let locality = placemark.locality {
+            addressComponents.append(locality)
+        }
+        if let administrativeArea = placemark.administrativeArea {
+            addressComponents.append(administrativeArea)
+        }
+        if let postalCode = placemark.postalCode {
+            addressComponents.append(postalCode)
+        }
+        if let country = placemark.country {
+            addressComponents.append(country)
+        }
+        
+        return addressComponents.joined(separator: ", ")
     }
     
 }
+
+/*
+ Get address (reverse geocoding)
+ https://stackoverflow.com/questions/52519860/how-to-convert-coordinates-to-address-using-swift
+
+ */
+
