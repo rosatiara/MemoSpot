@@ -25,6 +25,8 @@ struct MapView: UIViewRepresentable {
                 pinAnnotation.animatesWhenAdded = true
                 pinAnnotation.canShowCallout = true
                 
+                pinAnnotation.image = UIImage(named: "AppIcon")
+                
                 return pinAnnotation;
             }
             
@@ -47,12 +49,4 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         
     }
-    
-    
 }
-
-//struct MapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MapView()
-//    }
-//}
