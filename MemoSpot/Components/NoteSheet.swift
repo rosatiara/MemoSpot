@@ -9,13 +9,14 @@ import SwiftUI
 
 struct NoteSheet: View {
     @State private var reviewText = ""
+    @EnvironmentObject var mapData: MapViewModel
     @StateObject private var viewModel = CoreDataViewModel()
     var body: some View {
         ZStack {
             Color("gray").edgesIgnoringSafeArea(.all)
             VStack(spacing: 60) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Infinite Loop 1").fontWeight(.bold).font(.system(size: 24))
+                    Text(mapData.selectedPlace?.place.name ?? "No Place Selected").fontWeight(.bold).font(.system(size: 24))
                     TextField("Write your review..", text: $reviewText).foregroundColor(Color("accentColor")).accentColor(Color("accentColor")).font(.system(size: 18))
                 }
                 .padding(.horizontal, 35)
