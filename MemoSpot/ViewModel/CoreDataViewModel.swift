@@ -14,10 +14,15 @@ import CoreLocation
 
 
 class CoreDataViewModel: ObservableObject {
+    @Published var latitude: Double = 0.0
+    @Published var longitude: Double = 0.0
+    @Published var placeName: String = ""
+    @Published var review: String = ""
+    
     let manager = PersistenceController.shared
-
+    
     @Published var placeList: [PlaceEntity] = []
-
+    
     func fetchPlaces() {
         let request = NSFetchRequest<PlaceEntity>(entityName: "PlaceEntity")
         
@@ -29,31 +34,24 @@ class CoreDataViewModel: ObservableObject {
             }
         }
     }
-    
-    // check if there is no data added yet
-    func isPlaceEmpty() -> Bool {
-        return placeList.isEmpty
+        
+    func getPlaceReview() -> String {
+        guard(!placeList.isEmpty) else { return " " }
+        
+        return placeList.first!.review ?? "No review"
     }
     
     func getPlaceName() -> String {
-        if isPlaceEmpty() {
-            return "Empty"
-        }
-        else {
-            return placeList.first!.placeName ?? "error"
-
-        }
+        guard(!placeList.isEmpty) else { return " " }
+        
+        return placeList.first!.placeName ?? "No review"
     }
     
-    func addPlaceName(name: String) -> String {
-        let newPlace = PlaceEntity(context: manager.container.viewContext)
-        newPlace.placeName = name
-        save()
-        fetchPlaces()
-        return name
+    func addCoordinate(longitude: Double, latitude: Double) -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    func save() {
+    func saveReview() {
         withAnimation(Animation.default) {
             do {
                 try manager.container.viewContext.save()
@@ -65,8 +63,4 @@ class CoreDataViewModel: ObservableObject {
         }
     }
     
-    // executed when 'Save Review' button clicked
-    func saveCoordinate(latitude: Double, longitude: Double) {
-    }
-
 }

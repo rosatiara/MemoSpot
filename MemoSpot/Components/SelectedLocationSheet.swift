@@ -28,13 +28,16 @@ struct SelectedLocationSheet: View {
                 .foregroundColor(Color("accentColor"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Button("Add Review") {
-                    
+                    showNoteSheet = true
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("accentColor"))
                         .frame(width: 326, height: 50)
                 )
                 .foregroundColor(.black)
+                .sheet(isPresented: $showNoteSheet) {
+                    NoteSheet().presentationDetents([.fraction(0.4)]) // to make sheet smaller
+                }
             }
 
 
