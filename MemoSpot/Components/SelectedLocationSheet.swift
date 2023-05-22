@@ -22,13 +22,13 @@ struct SelectedLocationSheet: View {
                     Text(mapData.selectedPlace?.address ?? "").font(.system(size: 16))
                 }
                 .padding(.horizontal, 35)
-                .foregroundColor(Color("accentColor"))
+                .foregroundColor(Color("AccentColor"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Button("Add Review") {
                     showNoteSheet = true
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("accentColor"))
+                        .foregroundColor(Color("AccentColor"))
                         .frame(width: 326, height: 50)
                 )
                 .foregroundColor(.black)

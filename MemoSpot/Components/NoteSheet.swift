@@ -17,17 +17,17 @@ struct NoteSheet: View {
             VStack(spacing: 60) {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(mapData.selectedPlace?.place.name ?? "No Place Selected").fontWeight(.bold).font(.system(size: 24))
-                    TextField("Write your review..", text: $reviewText).foregroundColor(Color("accentColor")).accentColor(Color("accentColor")).font(.system(size: 18))
+                    TextField("Write your review..", text: $reviewText).foregroundColor(Color("AccentColor")).accentColor(Color("AccentColor")).font(.system(size: 18))
                 }
                 .padding(.horizontal, 35)
-                .foregroundColor(Color("accentColor"))
+                .foregroundColor(Color("AccentColor"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Button("Save Review") {
                     viewModel.saveNote()
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("accentColor"))
+                        .foregroundColor(Color("AccentColor"))
                         .frame(width: 326, height: 50)
                 )
                 .foregroundColor(.black)

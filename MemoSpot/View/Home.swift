@@ -32,7 +32,7 @@ struct Home: View {
                         Image(systemName: "location.fill")
                             .font(.title2)
                             .padding(15)
-                            .foregroundColor(Color("accentColor"))
+                            .foregroundColor(Color("AccentColor"))
                             .background(Color("gray"))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     })
@@ -42,7 +42,7 @@ struct Home: View {
                         Image(systemName: mapData.mapType == .standard ? "network" : "map")
                             .font(.title2)
                             .padding(15)
-                            .foregroundColor(Color("accentColor"))
+                            .foregroundColor(Color("AccentColor"))
                             .background(Color("gray"))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     })
@@ -56,8 +56,8 @@ struct Home: View {
                                 .resizable()
                                 .frame(width: 20, height: 20)
                                 .padding(.leading)
-                                .foregroundColor(Color("accentColor"))
-                            TextField("Search...", text: $mapData.searchedText).colorScheme(.dark).background(Color("gray")).accentColor(Color("accentColor"))
+                                .foregroundColor(Color("AccentColor"))
+                            TextField("Search...", text: $mapData.searchedText).colorScheme(.dark).background(Color("gray")).accentColor(Color("AccentColor"))
                         }.frame(width: 358, height: 50).background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("gray")))
                         if !mapData.places.isEmpty && mapData.searchedText != "" {
                             ScrollView {
