@@ -19,7 +19,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var places: [Place] = []
     @Published var selectedPlace: Place?
     @Published var selectedPlaceAddress: Place?
-        
+    @Published var annotations: [MKPointAnnotation] = []
+    
     
     // location permission
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -52,7 +53,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
     }
     
-    // change the type of Map
+    // change map type
     func updateMapType() {
         if mapType == .standard {
             mapType = .hybrid
@@ -95,8 +96,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         pointAnnotation.title = place.place.name ?? "No name"
         
         
-        // delete previous place's pins/annotations
-        mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(pointAnnotation)
         
         // map scale view
@@ -105,7 +104,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
         
         // get address from selected place
-        
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         
         // for address
@@ -132,9 +130,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         
     }
-    /*
-     format address with comma separator
-     */
+    
+    // format address with comma separator
     private func formatAddress(placemark: CLPlacemark) -> String {
         var addressComponents: [String] = []
         
@@ -160,11 +157,28 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         return addressComponents.joined(separator: ", ")
     }
     
+    func addAnnotationMarker(latitude: Double, longitude: Double, title: String) {
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = coordinate
+        pointAnnotation.title = title
+        
+        annotations.append(pointAnnotation)
+        
+        // update the map view with all stored annotations
+        mapView.addAnnotations(annotations)
+        
+        // set region to show the annotation
+        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
+    }
+    
 }
 
 /*
  Get address (reverse geocoding)
  https://stackoverflow.com/questions/52519860/how-to-convert-coordinates-to-address-using-swift
-
+ 
  */
 

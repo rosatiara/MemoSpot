@@ -28,7 +28,6 @@ struct NoteSheet: View {
                     guard let selectedPlace = mapData.selectedPlace else {
                             return
                         }
-                        
                         viewModel.saveNote(
                             longitude: selectedPlace.place.location?.coordinate.longitude ?? 0.0,
                             latitude: selectedPlace.place.location?.coordinate.latitude ?? 0.0,

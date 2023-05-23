@@ -26,6 +26,7 @@ class CoreDataViewModel: ObservableObject {
         } catch let error {
             print(error.localizedDescription)
         }
+        print(placeList)
     }
     
     func isDataEmpty() -> Bool {
@@ -35,7 +36,7 @@ class CoreDataViewModel: ObservableObject {
     func addPlaceNameData(placeName: String) {
         let newPlaceName = PlaceEntity(context: manager.container.viewContext)
         newPlaceName.placeName = placeName
-        
+
         saveChanges()
     }
     
@@ -63,6 +64,12 @@ class CoreDataViewModel: ObservableObject {
             newNote.placeNote = placeNote
             
             saveChanges()
+            
+            // add annotation
+            let mapViewModel = MapViewModel()
+            mapViewModel.addAnnotationMarker(latitude: latitude, longitude: longitude, title: placeName)
+            
+            // for debugging purposes
             print("data saved successfully")
             print(placeName)
             print(placeNote)
@@ -70,6 +77,7 @@ class CoreDataViewModel: ObservableObject {
             print(longitude)
         }
     }
+    
     
     private func saveChanges() {
         do {
@@ -80,12 +88,3 @@ class CoreDataViewModel: ObservableObject {
         }
     }
 }
-/*
- when saveBtn is clicked,
-    -> check if note is empty
-        -> if note is !empty
-            -> save current placeName
-            -> save current placeNote
-            -> save current coordinate(longitude, latitude)
-            -> add & save annotation to current coordinate
- */
