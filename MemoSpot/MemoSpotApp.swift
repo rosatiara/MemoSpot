@@ -17,6 +17,9 @@ struct MemoSpotApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(viewModel) // for CoreData
+                .onAppear {
+                    viewModel.fetchPlaces()
+                }
         }
     }
 }
