@@ -25,8 +25,16 @@ struct NoteSheet: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Button("Save Note") {
-                    
-                    // savePinCoordinate() 
+                    guard let selectedPlace = mapData.selectedPlace else {
+                            return
+                        }
+                        
+                        viewModel.saveNote(
+                            longitude: selectedPlace.place.location?.coordinate.longitude ?? 0.0,
+                            latitude: selectedPlace.place.location?.coordinate.latitude ?? 0.0,
+                            placeName: selectedPlace.place.name ?? "",
+                            placeNote: reviewText
+                        )
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("action"))
@@ -38,7 +46,6 @@ struct NoteSheet: View {
         }
         .onAppear {
             DispatchQueue.main.async {
-                reviewText = viewModel.getNote()
             }
         }
     }

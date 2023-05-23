@@ -13,15 +13,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var mapView = MKMapView()
     @Published var region: MKCoordinateRegion!
-    
     @Published var permissionDenied = false
-    
     @Published var mapType: MKMapType = .standard
-    
     @Published var searchedText = ""
     @Published var places: [Place] = []
     @Published var selectedPlace: Place?
     @Published var selectedPlaceAddress: Place?
+        
     
     // location permission
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -96,6 +94,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         pointAnnotation.coordinate = coordinate
         pointAnnotation.title = place.place.name ?? "No name"
         
+        
         // delete previous place's pins/annotations
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(pointAnnotation)
@@ -106,9 +105,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
         
         // get address from selected place
+        
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let longitude = coordinate.longitude
-        let latitude = coordinate.latitude
+        
+        // for address
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             guard error == nil else {
                 print("Reverse geocoding error:", error!.localizedDescription)
@@ -125,6 +125,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 self.selectedPlace?.address = address
             }
         }
+        
+        let name = pointAnnotation.title ?? "No name"
+        let longitude = location.coordinate.longitude
+        let latitude = location.coordinate.latitude
+        
+        
     }
     /*
      format address with comma separator

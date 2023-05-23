@@ -14,40 +14,18 @@ import CoreLocation
 
 
 class CoreDataViewModel: ObservableObject {
-    @Published var latitude: Double = 0.0
-    @Published var longitude: Double = 0.0
-    @Published var placeName: String = ""
-    @Published var placeNote: String = ""
-    
-    let manager = PersistenceController.shared
     
     @Published var placeList: [PlaceEntity] = []
+    let manager = PersistenceController.shared
     
     func fetchPlaces() {
-        let request = NSFetchRequest<PlaceEntity>(entityName: "PlaceEntity")
+        let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
         
-        withAnimation(Animation.default) {
-            do {
-                placeList = try manager.container.viewContext.fetch(request)
-            } catch let error {
-                print(error.localizedDescription)
-            }
+        do {
+            placeList = try manager.container.viewContext.fetch(request)
+        } catch let error {
+            print(error.localizedDescription)
         }
-    }
-    
-    func addPlaceCoordinate(longitude: Double, latitude: Double) {
-    }
-    
-    
-    func savePlace(longitude: Double, latitude: Double, placeName: String, placeNote: String) {
-        let newNote = PlaceEntity(context: manager.container.viewContext)
-        newNote.latitude = latitude
-        newNote.longitude = longitude
-        newNote.placeName = placeName
-        newNote.placeNote = placeNote
-        
-        save()
-        fetchPlaces()
     }
     
     func isDataEmpty() -> Bool {
@@ -58,39 +36,56 @@ class CoreDataViewModel: ObservableObject {
         let newPlaceName = PlaceEntity(context: manager.container.viewContext)
         newPlaceName.placeName = placeName
         
-        save()
-        fetchPlaces()
+        saveChanges()
     }
     
     func addNoteData(note: String) {
         let newNote = PlaceEntity(context: manager.container.viewContext)
         newNote.placeNote = note
-        save()
-        fetchPlaces()
+        
+        saveChanges()
     }
     
     func addPlaceCoordinateData(longitude: Double, latitude: Double) {
         let newPlaceCoordinate = PlaceEntity(context: manager.container.viewContext)
-        
         newPlaceCoordinate.longitude = longitude
         newPlaceCoordinate.latitude = latitude
         
-        save()
-        fetchPlaces()
+        saveChanges()
     }
     
-    func save() {
-        withAnimation(Animation.default) {
-            do {
-                try manager.container.viewContext.save()
-            }
+    func saveNote(longitude: Double, latitude: Double, placeName: String, placeNote: String) {
+        if !placeNote.isEmpty {
+            let newNote = PlaceEntity(context: manager.container.viewContext)
+            newNote.latitude = latitude
+            newNote.longitude = longitude
+            newNote.placeName = placeName
+            newNote.placeNote = placeNote
             
-            catch {
-                print(error.localizedDescription)
-            }
+            saveChanges()
+            print("data saved successfully")
+            print(placeName)
+            print(placeNote)
+            print(latitude)
+            print(longitude)
         }
     }
     
-    
-    
+    private func saveChanges() {
+        do {
+            try manager.container.viewContext.save()
+            fetchPlaces()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
+/*
+ when saveBtn is clicked,
+    -> check if note is empty
+        -> if note is !empty
+            -> save current placeName
+            -> save current placeNote
+            -> save current coordinate(longitude, latitude)
+            -> add & save annotation to current coordinate
+ */
