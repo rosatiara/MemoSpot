@@ -68,13 +68,14 @@ struct Home: View {
                                                 Text(place.place.name ?? "")
                                                     .fontWeight(.semibold)
                                                     .font(.system(size: 14))
+                                                    .foregroundColor(.white)
                                                 Text("\(place.place.locality ?? ""), \(place.place.country ?? "")")
                                                     .opacity(0.7)
                                                     .font(.system(size: 12))
+                                                    .foregroundColor(Color("detail"))
                                             }
                                             .padding(.leading, 16)
                                             .padding(.vertical, 16)
-                                            .foregroundColor(.white)
                                             .onTapGesture {
                                                 mapData.selectPlace(place: place)
                                                 showLocationSheet = true

@@ -25,8 +25,6 @@ struct MapView: UIViewRepresentable {
                 pinAnnotation.animatesWhenAdded = true
                 pinAnnotation.canShowCallout = true
                 
-                pinAnnotation.image = UIImage(named: "AppIcon")
-                
                 return pinAnnotation;
             }
             

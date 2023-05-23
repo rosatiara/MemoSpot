@@ -35,7 +35,11 @@ class CoreDataViewModel: ObservableObject {
         }
     }
     
-    func saveNote() {
+    func addPlaceCoordinate(longitude: Double, latitude: Double) {
+    }
+    
+    
+    func savePlace(longitude: Double, latitude: Double, placeName: String, placeNote: String) {
         let newNote = PlaceEntity(context: manager.container.viewContext)
         newNote.latitude = latitude
         newNote.longitude = longitude
@@ -44,31 +48,33 @@ class CoreDataViewModel: ObservableObject {
         
         save()
         fetchPlaces()
-        
-        // Reset the input fields after saving
-        latitude = 0.0
-        longitude = 0.0
-        placeName = ""
-        placeNote = ""
     }
     
     func isDataEmpty() -> Bool {
         return placeList.isEmpty
     }
     
-    func getName() -> String {
-        guard(!placeList.isEmpty) else { return " " }
+    func addPlaceNameData(placeName: String) {
+        let newPlaceName = PlaceEntity(context: manager.container.viewContext)
+        newPlaceName.placeName = placeName
         
-        return placeList.first!.placeName ?? "No review"
+        save()
+        fetchPlaces()
     }
     
-    func getCoordinate(longitude: Double, latitude: Double) -> CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-    
-    func addNote(note: String) {
+    func addNoteData(note: String) {
         let newNote = PlaceEntity(context: manager.container.viewContext)
         newNote.placeNote = note
+        save()
+        fetchPlaces()
+    }
+    
+    func addPlaceCoordinateData(longitude: Double, latitude: Double) {
+        let newPlaceCoordinate = PlaceEntity(context: manager.container.viewContext)
+        
+        newPlaceCoordinate.longitude = longitude
+        newPlaceCoordinate.latitude = latitude
+        
         save()
         fetchPlaces()
     }
@@ -84,5 +90,7 @@ class CoreDataViewModel: ObservableObject {
             }
         }
     }
+    
+    
     
 }

@@ -107,6 +107,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         // get address from selected place
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let longitude = coordinate.longitude
+        let latitude = coordinate.latitude
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             guard error == nil else {
                 print("Reverse geocoding error:", error!.localizedDescription)
@@ -130,9 +132,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private func formatAddress(placemark: CLPlacemark) -> String {
         var addressComponents: [String] = []
         
-        if let name = placemark.name {
-            addressComponents.append(name)
-        }
         if let thoroughfare = placemark.thoroughfare {
             addressComponents.append(thoroughfare)
         }
