@@ -12,6 +12,8 @@ import CoreLocation
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @Published var placeList: [PlaceEntity] = []
+    
     
     @Published var mapView = MKMapView()
     @Published var region: MKCoordinateRegion!
@@ -77,7 +79,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func searchPlaces() {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchedText /// natural language query = language that allows users to search for information using everyday language or phrases
-
+        
         MKLocalSearch(request: request).start { (response, _) in
             guard let result = response else {return}
             
@@ -123,11 +125,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 self.selectedPlace?.address = address
             }
         }
-        
-        let name = pointAnnotation.title ?? "No name"
-        let longitude = location.coordinate.longitude
-        let latitude = location.coordinate.latitude
-        
     }
     
     // format address with comma separator

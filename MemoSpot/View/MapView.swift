@@ -15,28 +15,38 @@ struct MapView: UIViewRepresentable {
     @FetchRequest(entity: PlaceEntity.entity(), sortDescriptors: []) var placeList: FetchedResults<PlaceEntity>
     
     class Coordinator: NSObject, MKMapViewDelegate {
+        let mapData: MapViewModel
         
-        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, didSelect view: MKAnnotationView) -> MKAnnotationView? {
-            
-            // customized pin
-            if annotation.isKind(of: MKUserLocation.self) {
-                return nil
-            } else {
-                let pinAnnotation = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "PIN_VIEW")
-                pinAnnotation.tintColor = .green
-                pinAnnotation.markerTintColor = .green
-                pinAnnotation.animatesWhenAdded = true
-                pinAnnotation.canShowCallout = true
-                
-                return pinAnnotation;
-            }
-            
+        init(mapData: MapViewModel) {
+            self.mapData = mapData
         }
         
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard !annotation.isKind(of: MKUserLocation.self) else {
+                return nil
+            }
+            
+            let identifier = "CustomAnnotationView"
+            var pinAnnotation = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if pinAnnotation == nil {
+                pinAnnotation = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                pinAnnotation?.canShowCallout = true
+                
+                let detailLabel = UILabel()
+                detailLabel.numberOfLines = 0 /// allow multiple lines of text
+                detailLabel.font = UIFont.systemFont(ofSize: 12)
+                detailLabel.text = annotation.subtitle ?? ""
+                pinAnnotation?.detailCalloutAccessoryView = detailLabel
+            } else {
+                pinAnnotation?.annotation = annotation
+            }
+            return pinAnnotation
+        }
     }
     
     func makeCoordinator() -> Coordinator {
-        return MapView.Coordinator()
+        return Coordinator(mapData: mapData)
     }
     
     func makeUIView(context: Context) -> MKMapView {
@@ -53,8 +63,12 @@ struct MapView: UIViewRepresentable {
             let coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
+            
+            /// for callout
             annotation.title = place.placeName
+            annotation.subtitle = place.placeNote
             uiView.addAnnotation(annotation)
         }
     }
+    
 }

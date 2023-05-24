@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		311AA9D12A1B0B2D0091423D /* MemoSpot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 311AA9CF2A1B0B2D0091423D /* MemoSpot.xcdatamodeld */; };
-		31483D1E2A1DC5300024F930 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31483D1D2A1DC5300024F930 /* test.swift */; };
 		31592B9A2A171ACD00290E1A /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592B992A171ACD00290E1A /* CoreDataViewModel.swift */; };
 		31592B9E2A19F03E00290E1A /* SelectedLocationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592B9D2A19F03E00290E1A /* SelectedLocationSheet.swift */; };
 		31592BA42A19F07A00290E1A /* NoteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31592BA32A19F07A00290E1A /* NoteSheet.swift */; };
@@ -25,7 +24,6 @@
 
 /* Begin PBXFileReference section */
 		311AA9D02A1B0B2D0091423D /* MemoSpot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MemoSpot.xcdatamodel; sourceTree = "<group>"; };
-		31483D1D2A1DC5300024F930 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		31592B992A171ACD00290E1A /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 		31592B9D2A19F03E00290E1A /* SelectedLocationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationSheet.swift; sourceTree = "<group>"; };
 		31592BA32A19F07A00290E1A /* NoteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSheet.swift; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 		3197AB702A16151200C8ED1E = {
 			isa = PBXGroup;
 			children = (
-				31483D1D2A1DC5300024F930 /* test.swift */,
 				3197AB7B2A16151200C8ED1E /* MemoSpot */,
 				3197AB7A2A16151200C8ED1E /* Products */,
 			);
@@ -200,7 +197,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				31592BA42A19F07A00290E1A /* NoteSheet.swift in Sources */,
-				31483D1E2A1DC5300024F930 /* test.swift in Sources */,
 				3197AB862A16151300C8ED1E /* Persistence.swift in Sources */,
 				31592B9A2A171ACD00290E1A /* CoreDataViewModel.swift in Sources */,
 				3197AB952A16187C00C8ED1E /* MapView.swift in Sources */,

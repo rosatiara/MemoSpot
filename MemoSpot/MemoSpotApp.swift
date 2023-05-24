@@ -10,15 +10,15 @@ import SwiftUI
 @main
 struct MemoSpotApp: App {
     let persistenceController = PersistenceController.shared
-    @StateObject var viewModel = CoreDataViewModel()
+    @StateObject var coreDataViewModel = CoreDataViewModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(viewModel) // for CoreData
+                .environmentObject(coreDataViewModel) // for CoreData
                 .onAppear {
-                    viewModel.fetchPlaces()
+                    coreDataViewModel.fetchPlaces()
                 }
         }
     }

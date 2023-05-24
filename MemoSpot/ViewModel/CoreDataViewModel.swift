@@ -36,7 +36,7 @@ class CoreDataViewModel: ObservableObject {
     func addPlaceNameData(placeName: String) {
         let newPlaceName = PlaceEntity(context: manager.container.viewContext)
         newPlaceName.placeName = placeName
-
+        
         saveChanges()
     }
     

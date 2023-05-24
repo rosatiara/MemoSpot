@@ -41,10 +41,3 @@ struct SelectedLocationSheet: View {
         }
     }
 }
-
-
-//struct SelectedLocationSheet_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SelectedLocationSheet()
-//    }
-//}
