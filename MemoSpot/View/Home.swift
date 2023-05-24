@@ -24,6 +24,8 @@ struct Home: View {
             MapView()
                 .environmentObject(mapData)
                 .ignoresSafeArea(.all, edges: .all)
+                .onAppear(){
+                }
             VStack {
                 VStack { // recenter & maptype buttons
                     Button(action: {

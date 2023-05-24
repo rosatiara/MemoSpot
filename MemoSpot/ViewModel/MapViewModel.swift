@@ -10,7 +10,8 @@ import MapKit
 import CoreLocation
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    
+    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+
     @Published var mapView = MKMapView()
     @Published var region: MKCoordinateRegion!
     @Published var permissionDenied = false
@@ -20,6 +21,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var selectedPlace: Place?
     @Published var selectedPlaceAddress: Place?
     @Published var annotations: [MKPointAnnotation] = []
+    // add coredataviewmodel
+
     
     
     // location permission
@@ -33,13 +36,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             manager.requestLocation()
         default:
             ()
-            
         }
     }
     
     // error checking
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+        coreDataViewModel.fetchPlaces()
     }
     
     // current user's location
@@ -129,6 +132,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let latitude = location.coordinate.latitude
         
         
+        
     }
     
     // format address with comma separator
@@ -167,13 +171,14 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         // update the map view with all stored annotations
         mapView.addAnnotations(annotations)
+    
         
         // set region to show the annotation
         let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
     }
-    
+    // coba
 }
 
 /*

@@ -7,12 +7,15 @@
 
 import SwiftUI
 import MapKit
+import Foundation
 
 struct MapView: UIViewRepresentable {
     
     @EnvironmentObject var mapData: MapViewModel
+    @FetchRequest(entity: PlaceEntity.entity(), sortDescriptors: []) var placeList: FetchedResults<PlaceEntity>
     
     class Coordinator: NSObject, MKMapViewDelegate {
+        
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, didSelect view: MKAnnotationView) -> MKAnnotationView? {
             
             // customized pin
@@ -29,6 +32,7 @@ struct MapView: UIViewRepresentable {
             }
             
         }
+        
     }
     
     func makeCoordinator() -> Coordinator {
@@ -45,6 +49,12 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        
+        for place in placeList {
+                    let coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate
+                    annotation.title = place.placeName
+                    uiView.addAnnotation(annotation)
+                }
     }
 }

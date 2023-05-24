@@ -75,6 +75,7 @@ class CoreDataViewModel: ObservableObject {
             print(placeNote)
             print(latitude)
             print(longitude)
+            fetchPlaces()
         }
     }
     
@@ -82,7 +83,7 @@ class CoreDataViewModel: ObservableObject {
     private func saveChanges() {
         do {
             try manager.container.viewContext.save()
-            fetchPlaces()
+            
         } catch {
             print(error.localizedDescription)
         }
