@@ -10,10 +10,10 @@ import MapKit
 
 struct Place: Identifiable {
     var id = UUID().uuidString
-    var place: CLPlacemark // Updated property name
-    var address: String? // Add address property
-        
-        init(place: CLPlacemark) {
-            self.place = place
-        }
+    var place: CLPlacemark
+    var address: String?
+    
+    init(place: CLPlacemark) {
+        self.place = place
+    }
 }

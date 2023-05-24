@@ -50,11 +50,11 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         for place in placeList {
-                    let coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = coordinate
-                    annotation.title = place.placeName
-                    uiView.addAnnotation(annotation)
-                }
+            let coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = place.placeName
+            uiView.addAnnotation(annotation)
+        }
     }
 }

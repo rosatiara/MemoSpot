@@ -10,8 +10,9 @@ import MapKit
 import CoreLocation
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-
+    
     @Published var mapView = MKMapView()
     @Published var region: MKCoordinateRegion!
     @Published var permissionDenied = false
@@ -19,11 +20,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var searchedText = ""
     @Published var places: [Place] = []
     @Published var selectedPlace: Place?
-    @Published var selectedPlaceAddress: Place?
     @Published var annotations: [MKPointAnnotation] = []
-    // add coredataviewmodel
-
-    
     
     // location permission
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -67,20 +64,20 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    // recenter map to current location
+    // Recenter map to current location
     func recenterMap() {
-        guard let _ = region else {
+        guard let _ = region else { /// check if `region` is not nil. if `region` is nil, the function exits early.
             return
         }
-        mapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: true) /// will be executed when  `region` is not nil
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
     }
     
     // display search results
     func searchPlaces() {
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = searchedText
-        
+        request.naturalLanguageQuery = searchedText /// natural language query = language that allows users to search for information using everyday language or phrases
+
         MKLocalSearch(request: request).start { (response, _) in
             guard let result = response else {return}
             
@@ -110,7 +107,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         
         // for address
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in /// error checking
             guard error == nil else {
                 print("Reverse geocoding error:", error!.localizedDescription)
                 return
@@ -121,7 +118,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
             
             let address = self.formatAddress(placemark: placemark) // address formatting
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { /// executed asynchronously on main queue
                 self.selectedPlace = place
                 self.selectedPlace?.address = address
             }
@@ -130,8 +127,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let name = pointAnnotation.title ?? "No name"
         let longitude = location.coordinate.longitude
         let latitude = location.coordinate.latitude
-        
-        
         
     }
     
@@ -171,7 +166,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         // update the map view with all stored annotations
         mapView.addAnnotations(annotations)
-    
         
         // set region to show the annotation
         let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
@@ -181,9 +175,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // coba
 }
 
-/*
- Get address (reverse geocoding)
- https://stackoverflow.com/questions/52519860/how-to-convert-coordinates-to-address-using-swift
- 
- */
+/* Get address (reverse geocoding)
+ https://stackoverflow.com/questions/52519860/how-to-convert-coordinates-to-address-using-swift */
 
