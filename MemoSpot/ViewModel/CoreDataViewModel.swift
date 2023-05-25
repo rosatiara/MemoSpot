@@ -78,7 +78,7 @@ class CoreDataViewModel: ObservableObject {
             fetchPlaces()
         }
     }
-    
+
     
     private func saveChanges() {
         do {

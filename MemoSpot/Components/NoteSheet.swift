@@ -34,6 +34,7 @@ struct NoteSheet: View {
                         placeName: selectedPlace.place.name ?? "",
                         placeNote: reviewText
                     )
+                    viewModel.fetchPlaces()
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("action"))
