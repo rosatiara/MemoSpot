@@ -33,28 +33,6 @@ class CoreDataViewModel: ObservableObject {
         return placeList.isEmpty
     }
     
-    func addPlaceNameData(placeName: String) {
-        let newPlaceName = PlaceEntity(context: manager.container.viewContext)
-        newPlaceName.placeName = placeName
-        
-        saveChanges()
-    }
-    
-    func addNoteData(note: String) {
-        let newNote = PlaceEntity(context: manager.container.viewContext)
-        newNote.placeNote = note
-        
-        saveChanges()
-    }
-    
-    func addPlaceCoordinateData(longitude: Double, latitude: Double) {
-        let newPlaceCoordinate = PlaceEntity(context: manager.container.viewContext)
-        newPlaceCoordinate.longitude = longitude
-        newPlaceCoordinate.latitude = latitude
-        
-        saveChanges()
-    }
-    
     func saveNote(longitude: Double, latitude: Double, placeName: String, placeNote: String) {
         if !placeNote.isEmpty {
             let newNote = PlaceEntity(context: manager.container.viewContext)
@@ -63,9 +41,7 @@ class CoreDataViewModel: ObservableObject {
             newNote.placeName = placeName
             newNote.placeNote = placeNote
             
-            saveChanges()
-            
-            // add annotation
+            //add annotation
             let mapViewModel = MapViewModel()
             mapViewModel.addAnnotationMarker(latitude: latitude, longitude: longitude, title: placeName)
             
@@ -75,7 +51,9 @@ class CoreDataViewModel: ObservableObject {
             print(placeNote)
             print(latitude)
             print(longitude)
+            saveChanges()
             fetchPlaces()
+
         }
     }
 

@@ -28,6 +28,7 @@ struct NoteSheet: View {
                     guard let selectedPlace = mapData.selectedPlace else {
                         return
                     }
+                    
                     viewModel.saveNote(
                         longitude: selectedPlace.place.location?.coordinate.longitude ?? 0.0,
                         latitude: selectedPlace.place.location?.coordinate.latitude ?? 0.0,
@@ -41,11 +42,15 @@ struct NoteSheet: View {
                         .frame(width: 326, height: 50)
                 )
                 .foregroundColor(.black)
+                .onDisappear {
+                    viewModel.fetchPlaces()
+                }
             }
             
         }
         .onAppear {
             DispatchQueue.main.async {
+                viewModel.fetchPlaces()
             }
         }
     }
